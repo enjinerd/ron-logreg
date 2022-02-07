@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
-import validationSchema from "../helpers/validation";
+import { registerValidationSchema } from "../helpers/validation";
 
 const theme = createTheme();
 
@@ -34,7 +34,7 @@ export function Register() {
       gender: "male",
       dob: new Date("2000-01-01"),
     },
-    validationSchema: validationSchema,
+    validationSchema: registerValidationSchema,
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 7));
       if (!localStorage.getItem(values.email)) {

@@ -1,7 +1,10 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
+import { useLocation } from "react-router-dom";
 
 export function Home() {
+  const userData = localStorage.getItem("loggedUser");
+
   return (
     <>
       <Typography
@@ -11,7 +14,8 @@ export function Home() {
         color="text.primary"
         gutterBottom
       >
-        Halo, Selamat Datang
+        Halo, Selamat Datang{" "}
+        {JSON.parse(userData)?.name ? JSON.parse(userData)?.name : "Pengunjung"}
       </Typography>
       <Typography
         variant="h5"
