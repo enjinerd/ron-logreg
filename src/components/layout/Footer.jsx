@@ -25,11 +25,11 @@ export default function Footer() {
     <Container
       maxWidth="md"
       component="footer"
+      align="center"
       sx={{
-        borderTop: (theme) => `1px solid ${theme.palette.divider}`,
         mt: 8,
         py: [3, 6],
-        position: "fixed",
+        position: "static",
         bottom: 0,
       }}
     >
