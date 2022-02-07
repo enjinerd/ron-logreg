@@ -1,37 +1,33 @@
-export function validateValue(value, validator) {
-  let isValid = true;
-  if (validator(value)) {
-    isValid = false;
-  }
-  return isValid;
-}
+import * as yup from "yup";
 
-export function validateNotEmpty(value) {
-  let error;
-  if (!value) {
-    error = "Harus diisi";
-  }
-  return error;
-}
+const validationSchema = yup.object({
+  email: yup
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string("Enter your confirm password")
+    .required()
+    .oneOf([yup.ref("password")], "Passwords do not match"),
 
-/**
- * Validate an email address.
- * @param email - The email address to validate.
- * @returns The error message.
- */
-export function validateEmail(email) {
-  let error;
+  name: yup.string("Enter your name").required("Name is required"),
+  gender: yup.string("Choose your gender").required("Gender is required"),
+  dob: yup
+    .date("Enter your date of birth")
+    .default(new Date("2001-01-01"))
+    .min(
+      new Date("1975-01-01"),
+      `Your dob should be equal or later than ${new Date("1975-01-01")}`
+    )
+    .max(
+      new Date("2008-01-01"),
+      `Your dob should be equal or earlier than ${new Date("2008-01-01")}`
+    )
+    .required("DOB is required"),
+});
 
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-    error = "Email tidak valid";
-  }
-  return error;
-}
-
-export function validateConfirmPassword(password, confirmPassword) {
-  let error;
-  if (password !== confirmPassword) {
-    error = "Konfirmasi Kata sandi tidak cocok";
-  }
-  return error;
-}
+export default validationSchema;
