@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "../helpers/validation";
 import { Link, useNavigate } from "react-router-dom";
+import ConfirmModal from "../components/ui/Modal";
 
 const theme = createTheme();
 
@@ -72,16 +73,12 @@ export function Login() {
             </Alert>
           )}
           {localStorage.getItem("loggedUser") ? (
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="error"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
+            <ConfirmModal
+              title="Are u sure wanna logout?"
+              body="Click confirm to prooced"
+              btnTitle="Logout"
+              action={handleLogout}
+            />
           ) : (
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={2}>

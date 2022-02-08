@@ -18,12 +18,17 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { registerValidationSchema } from "../helpers/validation";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export function Register() {
   const [isSucces, setSuccess] = useState(false);
   const [isExist, setExist] = useState(false);
+  let navigate = useNavigate();
+  if (localStorage.getItem("loggedUser")) {
+    navigate("/");
+  }
 
   const formik = useFormik({
     initialValues: {
