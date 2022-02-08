@@ -68,7 +68,7 @@ export function Login() {
             Sign in
           </Typography>
           {isNotExist && (
-            <Alert severity="success" sx={{ mb: 3 }}>
+            <Alert severity="error" sx={{ mb: 3 }}>
               Invalid email / password
             </Alert>
           )}
